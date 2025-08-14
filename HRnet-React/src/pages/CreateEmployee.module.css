@@ -2,13 +2,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: white;
+}
+
+.title {
+  color: black;
 }
 
 .form {
+  display: flex;
+  flex-direction: column;
   width: 50%;
-  background-color: #D4E571;
+  background-color: #93ad18;
   padding: 40px;
   border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .inputContainer {
@@ -41,11 +49,12 @@
   width: 100px;
   height: 40px;
   margin: 20px auto;
-  background-color: #414d1a;
+  background-color: #5a6f06;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  align-items: center;
 }
 
 .legend {
