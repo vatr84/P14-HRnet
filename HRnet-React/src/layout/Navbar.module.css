@@ -1,0 +1,31 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid grey;
+}
+
+.logoContainer {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.logo {
+  width: 150px;
+}
+
+.navContainer {
+  margin-right: 70px;
+}
+
+.navLink {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.navLink:hover {
+  color: #007bff;
+}

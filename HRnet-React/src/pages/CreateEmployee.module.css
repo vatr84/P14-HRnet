@@ -1,0 +1,55 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  width: 50%;
+  background-color: #D4E571;
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.label {
+  margin-bottom: 5px;
+}
+
+.input {
+  max-width: 200px;
+}
+
+.fieldset {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.select {
+  max-width: 200px;
+  height: 30px;
+}
+
+.button {
+  width: 100px;
+  height: 40px;
+  margin: 20px auto;
+  background-color: #414d1a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.legend {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
