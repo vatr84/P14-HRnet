@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { states } from "../data/states";
+import { departments } from "../data/departments";
+import { useState, memo } from "react";
 import { useDispatch } from "react-redux";
 import { addEmployee } from "../store/employeesSlice";
-import { states } from "../data/states";
+import Modal from "../components/modal/Modal";
+import { Calendar } from "../components/calendar/Calendar";
+import { SelectInput } from "../components/selectInput/SelectInput";
 import styles from "./CreateEmployee.module.css";
 
-export function CreateEmployee() {
+function CreateEmployee() {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [employee, setEmployee] = useState({
@@ -19,14 +23,19 @@ export function CreateEmployee() {
     zipCode: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { id, value } = e.target;
     setEmployee({ ...employee, [id]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
-    dispatch(addEmployee(employee));
+    dispatch(
+      addEmployee({
+        ...employee,
+        id: Date.now().toString(),
+      })
+    );
     setIsModalOpen(true);
   };
 
@@ -45,137 +54,172 @@ export function CreateEmployee() {
     });
   };
 
+  const fullName = `${employee.firstName} ${employee.lastName}`.trim();
+  const successMessage = fullName
+    ? `${fullName} has been added successfully to the employees.`
+    : `Employee has been created successfully.`;
+
   return (
     <div className={styles.pageContainer}>
       <h1 className={styles.title}>Create Employee</h1>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form
+        className={styles.form}
+        onSubmit={handleSubmit}
+        aria-labelledby="form-heading"
+      >
+        <h2 id="form-heading" className={styles.srOnly}>
+          Employee Information Form
+        </h2>
+
         <div className={styles.inputContainer}>
-          <label htmlFor="firstName" className={styles.label}>First Name</label>
+          <label className={styles.label} htmlFor="firstName">
+            First Name
+          </label>
           <input
+            className={styles.input}
             id="firstName"
             type="text"
             value={employee.firstName}
             onChange={handleChange}
             required
-            className={styles.input}
+            aria-required="true"
           />
         </div>
+
         <div className={styles.inputContainer}>
-          <label htmlFor="lastName" className={styles.label}>Last Name</label>
+          <label className={styles.label} htmlFor="lastName">
+            Last Name
+          </label>
           <input
+            className={styles.input}
             id="lastName"
             type="text"
             value={employee.lastName}
             onChange={handleChange}
             required
-            className={styles.input}
+            aria-required="true"
           />
         </div>
+
         <div className={styles.inputContainer}>
-          <label htmlFor="birthDate" className={styles.label}>Date of Birth</label>
-          <input
+          <label className={styles.label} htmlFor="birthDate">
+            Date of Birth
+          </label>
+          <Calendar
             id="birthDate"
-            type="date"
             value={employee.birthDate}
             onChange={handleChange}
             required
-            className={styles.input}
+            aria-required="true"
           />
         </div>
+
         <div className={styles.inputContainer}>
-          <label htmlFor="startDate" className={styles.label}>Start Date</label>
-          <input
+          <label className={styles.label} htmlFor="startDate">
+            Start Date
+          </label>
+          <Calendar
             id="startDate"
-            type="date"
             value={employee.startDate}
             onChange={handleChange}
             required
-            className={styles.input}
+            aria-required="true"
           />
         </div>
+
         <fieldset className={styles.fieldset}>
           <legend className={styles.legend}>Address</legend>
+
           <div className={styles.inputContainer}>
-            <label htmlFor="address" className={styles.label}>Street</label>
+            <label className={styles.label} htmlFor="address">
+              Street
+            </label>
             <input
+              className={styles.input}
               id="address"
               type="text"
               value={employee.address}
               onChange={handleChange}
               required
-              className={styles.input}
+              aria-required="true"
             />
           </div>
+
           <div className={styles.inputContainer}>
-            <label htmlFor="city" className={styles.label}>City</label>
+            <label className={styles.label} htmlFor="city">
+              City
+            </label>
             <input
+              className={styles.input}
               id="city"
               type="text"
               value={employee.city}
               onChange={handleChange}
               required
-              className={styles.input}
+              aria-required="true"
             />
           </div>
+
           <div className={styles.inputContainer}>
-            <label htmlFor="state" className={styles.label}>State</label>
-            <select
+            <label className={styles.label} htmlFor="state">
+              State
+            </label>
+            <SelectInput
               id="state"
               value={employee.state}
               onChange={handleChange}
+              options={states}
+              placeholder="Select State"
               required
-              className={styles.select}
-            >
-              <option value="">Select State</option>
-              {states.map((state) => (
-                <option key={state.abbreviation} value={state.abbreviation}>
-                  {state.name}
-                </option>
-              ))}
-            </select>
+            />
           </div>
+
           <div className={styles.inputContainer}>
-            <label htmlFor="zipCode" className={styles.label}>Zip Code</label>
+            <label className={styles.label} htmlFor="zipCode">
+              Zip Code
+            </label>
             <input
+              className={styles.input}
               id="zipCode"
               type="number"
               value={employee.zipCode}
               onChange={handleChange}
               required
-              className={styles.input}
+              aria-required="true"
+              inputMode="numeric"
+              pattern="[0-9]*"
             />
           </div>
         </fieldset>
+
         <div className={styles.inputContainer}>
-          <label htmlFor="department" className={styles.label}>Department</label>
-          <select
+          <label className={styles.label} htmlFor="department">
+            Department
+          </label>
+          <SelectInput
             id="department"
             value={employee.department}
             onChange={handleChange}
+            options={departments}
+            placeholder="Select Department"
             required
-            className={styles.select}
-          >
-            <option value="">Select Department</option>
-            <option value="Sales">Sales</option>
-            <option value="Marketing">Marketing</option>
-            <option value="Engineering">Engineering</option>
-            <option value="HR">Human Resources</option>
-            <option value="Legal">Legal</option>
-          </select>
+          />
         </div>
-        <button type="submit" className={styles.button}>Save</button>
+
+        <button
+          type="submit"
+          className={styles.button}
+          aria-label="Save employee information"
+        >
+          Save
+        </button>
       </form>
-      {isModalOpen && (
-        <div className={styles.modalOverlay}>
-          <div className={styles.modalContent}>
-            <h2>Success!</h2>
-            <p>Employee has been created successfully.</p>
-            <button className={styles.modalButton} onClick={closeModal}>
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+
+      <Modal isOpen={isModalOpen} onClose={closeModal} title="Success!" closeText="Close">
+        <p>{successMessage}</p>
+      </Modal>
     </div>
   );
 }
+
+export default memo(CreateEmployee);

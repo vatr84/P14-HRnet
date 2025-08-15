@@ -1,0 +1,10 @@
+.calendarInput {
+  max-width: 200px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.calendarInput:focus {
+  outline: 2px solid #0078d4;
+}

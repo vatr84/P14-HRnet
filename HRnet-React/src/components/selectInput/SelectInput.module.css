@@ -1,0 +1,12 @@
+.selectInput {
+  max-width: 200px;
+  height: 36px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.selectInput:focus {
+  outline: 2px solid #0078d4;
+  border-color: transparent;
+}

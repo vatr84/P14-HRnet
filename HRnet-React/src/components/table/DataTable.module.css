@@ -1,0 +1,88 @@
+.tableContainer {
+  padding: 1rem;
+  width: 100%;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 0.9em;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.tableHeader {
+  background-color: #93ad18;
+  color: white;
+  text-align: left;
+  font-weight: bold;
+}
+
+.tableRow {
+  border-bottom: 1px solid #dddddd;
+}
+
+.tableRow:last-of-type {
+  border-bottom: 2px solid #93ad18;
+}
+
+.tableCell,
+.tableHeaderCell {
+  padding: 12px 15px;
+}
+
+.tableHeaderCell {
+  cursor: pointer;
+}
+
+.tableHeaderCell:hover {
+  background-color: #5a6f06;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.pageButton {
+  padding: 5px 10px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.pageButton[aria-current="true"],
+.pageButton:active {
+  background-color: #009879;
+  color: white;
+}
+
+.pageButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.searchInput {
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.pageSizeSelector {
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.emptyMessage {
+  text-align: center;
+  margin: 20px 0;
+}
