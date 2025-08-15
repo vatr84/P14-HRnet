@@ -1,17 +1,16 @@
-import styles from "./CreateEmployee.module.css";
-import { states } from "../data/states";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addEmployee } from "../store/employeesSlice";
-import { useNavigate } from "react-router";
+import { states } from "../data/states";
+import styles from "./CreateEmployee.module.css";
 
 export function CreateEmployee() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [employee, setEmployee] = useState({
     firstName: "",
     lastName: "",
-    hireDate: "",
+    startDate: "",
     department: "",
     birthDate: "",
     address: "",
@@ -28,7 +27,22 @@ export function CreateEmployee() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addEmployee(employee));
-    navigate("/employee-list");
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setEmployee({
+      firstName: "",
+      lastName: "",
+      startDate: "",
+      department: "",
+      birthDate: "",
+      address: "",
+      city: "",
+      state: "",
+      zipCode: "",
+    });
   };
 
   return (
@@ -37,7 +51,7 @@ export function CreateEmployee() {
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.inputContainer}>
           <label htmlFor="firstName" className={styles.label}>First Name</label>
-                   <input
+          <input
             id="firstName"
             type="text"
             value={employee.firstName}
@@ -69,11 +83,11 @@ export function CreateEmployee() {
           />
         </div>
         <div className={styles.inputContainer}>
-          <label htmlFor="hireDate" className={styles.label}>Start Date</label>
+          <label htmlFor="startDate" className={styles.label}>Start Date</label>
           <input
-            id="hireDate"
+            id="startDate"
             type="date"
-            value={employee.hireDate}
+            value={employee.startDate}
             onChange={handleChange}
             required
             className={styles.input}
@@ -125,7 +139,7 @@ export function CreateEmployee() {
             <input
               id="zipCode"
               type="number"
-                            value={employee.zipCode}
+              value={employee.zipCode}
               onChange={handleChange}
               required
               className={styles.input}
@@ -151,7 +165,17 @@ export function CreateEmployee() {
         </div>
         <button type="submit" className={styles.button}>Save</button>
       </form>
+      {isModalOpen && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <h2>Success!</h2>
+            <p>Employee has been created successfully.</p>
+            <button className={styles.modalButton} onClick={closeModal}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-

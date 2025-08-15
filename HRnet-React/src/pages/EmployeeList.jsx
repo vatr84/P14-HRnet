@@ -17,42 +17,15 @@ export function EmployeeList() {
 
   const columns = useMemo(
     () => [
-            {
-        header: "First Name",
-        accessorKey: "firstName",
-      },
-      {
-        header: "Last Name",
-        accessorKey: "lastName",
-      },
-      {
-        header: "Hire Date",
-        accessorKey: "hireDate",
-      },
-      {
-        header: "Department",
-        accessorKey: "department",
-      },
-      {
-        header: "Date of Birth",
-        accessorKey: "birthDate",
-      },
-      {
-        header: "Address",
-        accessorKey: "address",
-      },
-      {
-        header: "City",
-        accessorKey: "city",
-      },
-      {
-        header: "State",
-        accessorKey: "state",
-      },
-      {
-        header: "Zip Code",
-        accessorKey: "zipCode",
-      },
+      { header: "First Name", accessorKey: "firstName" },
+      { header: "Last Name", accessorKey: "lastName" },
+      { header: "Start Date", accessorKey: "startDate" },
+      { header: "Department", accessorKey: "department" },
+      { header: "Date of Birth", accessorKey: "birthDate" },
+      { header: "Address", accessorKey: "address" },
+      { header: "City", accessorKey: "city" },
+      { header: "State", accessorKey: "state" },
+      { header: "Zip Code", accessorKey: "zipCode" },
     ],
     []
   );
@@ -60,36 +33,28 @@ export function EmployeeList() {
   const table = useReactTable({
     data: employees,
     columns,
-    state: {
-      globalFilter,
-    },
+    state: { globalFilter },
     onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    initialState: {
-      pagination: {
-        pageSize: 10,
-      },
-    },
+    initialState: { pagination: { pageSize: 10 } },
   });
 
   return (
     <div className={styles.tableContainer}>
       <h1>Current Employees</h1>
-
       <input
         className={styles.searchInput}
         value={globalFilter ?? ""}
         onChange={(e) => setGlobalFilter(e.target.value)}
         placeholder="Search all columns..."
       />
-
       {employees.length === 0 ? (
         <p>No employees found. Please add employees from the home page.</p>
       ) : (
-        <table className={styles.styledTable}>
+        <table className={styles.table}>
           <thead className={styles.tableHeader}>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
@@ -122,7 +87,6 @@ export function EmployeeList() {
           </tbody>
         </table>
       )}
-
       <div className={styles.pagination}>
         <div>
           <select
@@ -181,4 +145,3 @@ export function EmployeeList() {
     </div>
   );
 }
-           
