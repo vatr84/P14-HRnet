@@ -1,8 +1,8 @@
-import React from 'react';
+import { memo, useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Modal.module.css';
 
-const Modal = React.memo(({
+const Modal = memo(({
   isOpen,
   onClose,
   children,
@@ -12,11 +12,11 @@ const Modal = React.memo(({
   className = "",
   fadeDuration = 300
 }) => {
-  const [isVisible, setIsVisible] = React.useState(false);
-  const overlayRef = React.useRef(null);
-  const contentRef = React.useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const overlayRef = useRef(null);
+  const contentRef = useRef(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isOpen) {
       setIsVisible(true);
       document.body.style.overflow = 'hidden';
@@ -40,7 +40,7 @@ const Modal = React.memo(({
     }
   }, [isOpen, fadeDuration]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleEscKey = (e) => {
       if (e.key === 'Escape' && isOpen) {
         onClose();

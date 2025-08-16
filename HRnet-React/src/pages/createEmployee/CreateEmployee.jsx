@@ -1,11 +1,11 @@
-import { states } from "../data/states";
-import { departments } from "../data/departments";
+import { states } from "../../data/states";
+import { departments } from "../../data/departments";
 import { useState, memo } from "react";
 import { useDispatch } from "react-redux";
-import { addEmployee } from "../store/employeesSlice";
-import Modal from "../components/modal/Modal";
-import { Calendar } from "../components/calendar/Calendar";
-import { SelectInput } from "../components/selectInput/SelectInput";
+import { addEmployee } from "../../store/employeesSlice";
+import Modal from "../../components/modal/Modal";
+import { Calendar } from "../../components/calendar/Calendar";
+import { SelectInput } from "../../components/selectInput/SelectInput";
 import styles from "./CreateEmployee.module.css";
 
 function CreateEmployee() {

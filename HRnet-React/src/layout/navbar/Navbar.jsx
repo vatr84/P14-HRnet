@@ -1,4 +1,4 @@
-import HRnet from "../assets/HRnet.png";
+import HRnet from "../../assets/HRnet.png";
 import { NavLink, useLocation } from "react-router";
 import styles from "./Navbar.module.css";
 

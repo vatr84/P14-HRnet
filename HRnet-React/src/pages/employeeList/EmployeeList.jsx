@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { selectEmployees } from "../store/employeesSlice";
-import { DataTable } from "../components/table/DataTable";
+import { selectEmployees } from "../../store/employeesSlice";
+import { DataTable } from "../../components/table/DataTable";
 import styles from "./EmployeeList.module.css";
 
 export function EmployeeList() {
