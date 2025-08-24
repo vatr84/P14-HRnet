@@ -10,6 +10,12 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, employeesReducer);
 
+/**
+ * Redux store configuration
+ * Sets up the store with persisted employee reducer using redux-persist.
+ *
+ * @type {import('@reduxjs/toolkit').EnhancedStore}
+ */
 export const store = configureStore({
   reducer: {
     employee: persistedReducer,
@@ -22,4 +28,10 @@ export const store = configureStore({
     }),
 });
 
+/**
+ * Persistor for the Redux store
+ * Enables persistence of the store state across sessions.
+ *
+ * @type {import('redux-persist').Persistor}
+ */
 export const persistor = persistStore(store);

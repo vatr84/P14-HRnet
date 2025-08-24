@@ -8,6 +8,13 @@ import { Calendar } from "../../components/calendar/Calendar";
 import { SelectInput } from "../../components/selectInput/SelectInput";
 import styles from "./CreateEmployee.module.css";
 
+/**
+ * CreateEmployee page component
+ * Renders a form for creating a new employee and handles form submission.
+ * Uses Redux for state management and displays a modal on success.
+ *
+ * @returns {JSX.Element} The rendered create employee page
+ */
 function CreateEmployee() {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,11 +30,19 @@ function CreateEmployee() {
     zipCode: "",
   });
 
+  /**
+   * Handles input changes for all form fields
+   * @param {React.ChangeEvent<HTMLInputElement|HTMLSelectElement>} e - The change event
+   */
   const handleChange = e => {
     const { id, value } = e.target;
     setEmployee({ ...employee, [id]: value });
   };
 
+  /**
+   * Handles form submission, dispatches addEmployee action, and opens modal
+   * @param {React.FormEvent<HTMLFormElement>} e - The form submit event
+   */
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(
@@ -39,6 +54,9 @@ function CreateEmployee() {
     setIsModalOpen(true);
   };
 
+  /**
+   * Closes the modal and resets the employee form
+   */
   const closeModal = () => {
     setIsModalOpen(false);
     setEmployee({
@@ -62,6 +80,7 @@ function CreateEmployee() {
   return (
     <div className={styles.pageContainer}>
       <h1 className={styles.title}>Create Employee</h1>
+      {/* Employee creation form with validation and accessibility features */}
       <form
         className={styles.form}
         onSubmit={handleSubmit}
@@ -215,6 +234,7 @@ function CreateEmployee() {
         </button>
       </form>
 
+      {/* Success modal shown after employee creation */}
       <Modal isOpen={isModalOpen} onClose={closeModal} title="Success!" closeText="Close">
         <p>{successMessage}</p>
       </Modal>

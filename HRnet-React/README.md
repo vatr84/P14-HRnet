@@ -1,12 +1,48 @@
-# React + Vite
+# HRnet React Refactoring
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Overview
+This repository contains two versions of the HRnet employee management system:
+- **HRnet-jQuery**: Legacy implementation using jQuery.
+- **HRnet-React**: Modern refactored version using React, Redux Toolkit, and Vite.
 
-Currently, two official plugins are available:
+## Refactoring Highlights
+- Migrated from jQuery to React for improved maintainability, scalability, and developer experience.
+- State management handled with Redux Toolkit and persistence via redux-persist.
+- Modular component structure for better reusability and testing.
+- Modern build setup using Vite for fast development and optimized production builds.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Performance Comparison (Lighthouse)
+Lighthouse audits show significant improvements in the React version:
 
-## Expanding the ESLint configuration
+- **React version loads faster and is more accessible.**
+- **Code is easier to maintain and extend.**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Modal Component: vatr84-modal-component
+This project uses the custom modal package [`vatr84-modal-component`](https://www.npmjs.com/package/vatr84-modal-component), published on npm.
+- Provides a reusable, accessible modal dialog for React applications.
+- Easily integrated and customizable.
+- Example usage:
+  ```jsx
+  import Modal from "vatr84-modal-component";
+  <Modal isOpen={isOpen} onClose={closeModal} title="Success!" closeText="Close">
+    <p>Employee created successfully.</p>
+  </Modal>
+  ```
+
+## Getting Started
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## Folder Structure
+- `HRnet-jQuery/` — Legacy jQuery version
+- `HRnet-React/` — Refactored React version
+- `Lighthouse/` — Performance reports
+
+## License
+MIT

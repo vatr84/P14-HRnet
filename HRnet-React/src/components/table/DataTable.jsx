@@ -10,6 +10,16 @@ import {
   flexRender,
 } from "@tanstack/react-table";
 
+/**
+ * DataTable component
+ * @param {Object[]} data - Array of row data
+ * @param {Object[]} columns - Array of column definitions
+ * @param {string} emptyMessage - Message to display when no data
+ * @param {number[]} pageSizeOptions - Options for page size selection
+ * @param {number} defaultPageSize - Default page size
+ * @param {boolean} showGlobalFilter - Show global filter input
+ * @param {boolean} showPagination - Show pagination controls
+ */
 export function DataTable({
   data = [],
   columns = [],
@@ -39,8 +49,15 @@ export function DataTable({
     },
   });
 
+  /**
+   * DataTable component container
+   * Uses scoped CSS for layout and style isolation
+   */
   return (
     <div className={styles.tableContainer}>
+      {/**
+       * Global filter input for accessibility and usability
+       */}
       {showGlobalFilter && (
         <input
           value={globalFilter ?? ""}
@@ -51,11 +68,17 @@ export function DataTable({
         />
       )}
 
+      {/**
+       * Show an empty message when no data is available
+       */}
       {data.length === 0 ? (
         <p className={styles.emptyMessage}>{emptyMessage}</p>
       ) : (
         <table className={styles.table}>
           <thead className={styles.tableHeader}>
+            {/**
+             * Use semantic <th> and <thead> for accessibility
+             */}
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
@@ -72,10 +95,16 @@ export function DataTable({
                     }
                     className={styles.tableHeaderCell}
                   >
+                    {/**
+                     * Custom header rendering with flexRender
+                     */}
                     {flexRender(
                       header.column.columnDef.header,
                       header.getContext()
                     )}
+                    {/**
+                     * Sort indicators for user feedback
+                     */}
                     {{ asc: " 🔼", desc: " 🔽" }[header.column.getIsSorted()] ??
                       ""}
                   </th>
@@ -84,10 +113,16 @@ export function DataTable({
             ))}
           </thead>
           <tbody>
+            {/**
+             * Render only visible rows for performance
+             */}
             {table.getRowModel().rows.map((row) => (
               <tr className={styles.tableRow} key={row.id}>
                 {row.getVisibleCells().map((cell) => (
                   <td className={styles.tableCell} key={cell.id}>
+                    {/**
+                     * Custom cell rendering with flexRender
+                     */}
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
@@ -97,9 +132,15 @@ export function DataTable({
         </table>
       )}
 
+      {/**
+       * Show pagination controls for large datasets
+       */}
       {showPagination && data.length > 0 && (
         <div className={styles.pagination}>
           <div>
+            {/**
+             * Allow users to select page size
+             */}
             <select
               className={styles.pageSizeSelector}
               value={table.getState().pagination.pageSize}
@@ -116,6 +157,9 @@ export function DataTable({
             </select>
           </div>
 
+          {/**
+           * Show current page and total pages
+           */}
           <span>
             Page{" "}
             <strong>
@@ -125,6 +169,9 @@ export function DataTable({
           </span>
 
           <div>
+            {/**
+             * Provide accessible pagination buttons
+             */}
             <button
               className={styles.pageButton}
               onClick={() => table.setPageIndex(0)}
@@ -160,10 +207,16 @@ export function DataTable({
           </div>
         </div>
       )}
+      {/**
+      * Keep component stateless except for UI state (filter, pagination)
+      */}
     </div>
   );
 }
 
+/**
+ * Prop types for validation and maintainability
+ */
 DataTable.propTypes = {
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,

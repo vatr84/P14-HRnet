@@ -4,9 +4,20 @@ import { selectEmployees } from "../../store/employeesSlice";
 import { DataTable } from "../../components/table/DataTable";
 import styles from "./EmployeeList.module.css";
 
+/**
+ * EmployeeList page component
+ * Displays a table of current employees using the DataTable component.
+ * Fetches employee data from Redux store and memoizes table columns.
+ *
+ * @returns {JSX.Element} The rendered employee list page
+ */
 export function EmployeeList() {
   const employees = useSelector(selectEmployees);
 
+  /**
+   * Table column definitions for DataTable
+   * Memoized for performance
+   */
   const columns = useMemo(
     () => [
       { header: "First Name", accessorKey: "firstName" },
@@ -25,6 +36,7 @@ export function EmployeeList() {
   return (
     <div className={styles.pageContainer}>
       <h1 className={styles.title}>Current Employees</h1>
+      {/* DataTable displays the list of employees with filtering and pagination */}
       <DataTable
         data={employees}
         columns={columns}

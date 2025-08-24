@@ -2,6 +2,13 @@ import HRnet from "../../assets/HRnet.png";
 import { NavLink, useLocation } from "react-router";
 import styles from "./Navbar.module.css";
 
+/**
+ * Navbar component
+ * Displays the application logo and navigation links.
+ * Highlights navigation based on current route.
+ *
+ * @returns {JSX.Element} The rendered navigation bar
+ */
 export function Navbar() {
   const location = useLocation();
   const isOnEmployeePage = location.pathname === "/employee-list";
